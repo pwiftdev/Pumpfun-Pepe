@@ -9,7 +9,7 @@ import NFTModal from '@/components/NFTModal';
 import TeamModal from '@/components/TeamModal';
 import Link from 'next/link';
 import { useMemo, useState, useEffect } from 'react';
-import { FaGamepad } from 'react-icons/fa';
+import { FaGamepad, FaShoppingBag } from 'react-icons/fa';
 
 const normieComments = [
   "This sends",
@@ -55,6 +55,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [showNFTModal, setShowNFTModal] = useState(false);
   const [showTeamModal, setShowTeamModal] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   // Hide loader after 2.5 seconds
   useEffect(() => {
@@ -65,8 +66,16 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
+  // Set mounted state to true only on client
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // Generate comment props once on mount to avoid hydration issues
   const comments = useMemo(() => {
+    // Only generate comments on client side
+    if (!mounted) return [];
+    
     // Show fewer comments on mobile
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
     const commentsToShow = isMobile ? normieComments.slice(0, 10) : normieComments;
@@ -80,7 +89,7 @@ export default function Home() {
       startX: Math.random() * 80 + 5, // Random X position (5-85%)
       startY: Math.random() * 80 + 5, // Random Y position (5-85%)
     }));
-  }, []);
+  }, [mounted]);
 
   return (
     <>
@@ -92,8 +101,20 @@ export default function Home() {
       {/* Team Modal */}
       <TeamModal isOpen={showTeamModal} onClose={() => setShowTeamModal(false)} />
       
+      {/* PFP Merch Banner - Top of Page */}
+      <a
+        href="https://pfpmerch.fun/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed top-0 left-0 right-0 z-[60] bg-gradient-to-r from-[#00ff41] to-[#00cc34] text-black font-black text-sm sm:text-base py-2 sm:py-3 px-4 text-center hover:from-[#00cc34] hover:to-[#00ff41] transition-all duration-300 shadow-lg hover:shadow-[0_0_30px_rgba(0,255,65,0.6)] flex items-center justify-center gap-2"
+      >
+        <FaShoppingBag className="w-4 h-4 sm:w-5 sm:h-5 animate-pulse" />
+        <span>PFP Merch - Get Yours Now</span>
+        <span className="hidden sm:inline">→</span>
+      </a>
+      
       {/* Fixed Whitepaper Button - Top Left */}
-      <div className="fixed top-2 left-2 sm:top-4 sm:left-4 z-50 w-[120px] sm:w-[180px]">
+      <div className="fixed top-14 left-2 sm:top-20 sm:left-4 z-50 w-[120px] sm:w-[180px]">
         <a
           href="/Pfp Whitepaper.pdf"
           target="_blank"
@@ -114,7 +135,7 @@ export default function Home() {
       </div>
 
       {/* Fixed Play Game Button - Top Left Below Whitepaper */}
-      <div className="fixed top-12 left-2 sm:top-20 sm:left-4 z-50 w-[120px] sm:w-[180px]">
+      <div className="fixed top-28 left-2 sm:top-36 sm:left-4 z-50 w-[120px] sm:w-[180px]">
         <Link
           href="/pacman"
           className="w-full px-3 py-1.5 sm:px-6 sm:py-3 bg-transparent border-2 border-purple-500 hover:bg-purple-500/10 text-purple-400 font-bold text-xs sm:text-base rounded-lg shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(147,51,234,0.5)] flex items-center justify-center gap-1 sm:gap-2 backdrop-blur-sm"
@@ -126,7 +147,7 @@ export default function Home() {
       </div>
       
       {/* Fixed Market Cap Tracker - Top Right */}
-      <div className="fixed top-2 right-2 sm:top-4 sm:right-4 z-50">
+      <div className="fixed top-14 right-2 sm:top-20 sm:right-4 z-50">
         <MarketCapTracker />
       </div>
 
@@ -135,7 +156,7 @@ export default function Home() {
         href="https://moonshot.com/5TfqNKZbn9AnNtzq8bbkyhKgcPGTfNDc9wNzFrTBpump"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed top-12 right-2 sm:top-20 sm:right-4 z-50 group"
+        className="fixed top-28 right-2 sm:top-36 sm:right-4 z-50 group"
         title="View on Moonshot"
       >
         <div className="relative px-2 py-1.5 sm:px-4 sm:py-3 h-[28px] sm:h-[44px] bg-gray-800 rounded-full shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-[0_0_30px_rgba(107,114,128,0.6)] flex items-center justify-center gap-1 sm:gap-2">
@@ -152,7 +173,7 @@ export default function Home() {
         href="https://www.mexc.com/exchange/PFP_USDT"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed top-[88px] right-2 sm:top-36 sm:right-4 z-50 group"
+        className="fixed top-[112px] right-2 sm:top-52 sm:right-4 z-50 group"
         title="Trade PFP on MEXC"
       >
         <div className="relative px-2 py-1.5 sm:px-4 sm:py-3 h-[28px] sm:h-[44px] bg-gradient-to-br from-[#00d4ff] to-[#0099cc] rounded-full shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-[0_0_30px_rgba(0,212,255,0.6)] flex items-center justify-center gap-1 sm:gap-2">
@@ -216,7 +237,7 @@ export default function Home() {
       </div>
 
       {/* Main Hero Content */}
-      <div className="relative z-10 w-full min-h-screen flex items-center justify-center px-4 py-8">
+      <div className="relative z-10 w-full min-h-screen flex items-center justify-center px-4 py-8 pt-20 sm:pt-28">
         <Hero />
       </div>
 
