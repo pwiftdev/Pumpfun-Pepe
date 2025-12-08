@@ -7,9 +7,10 @@ import Loader from '@/components/Loader';
 import MarketCapTracker from '@/components/MarketCapTracker';
 import NFTModal from '@/components/NFTModal';
 import TeamModal from '@/components/TeamModal';
-import Link from 'next/link';
+import Sidebar from '@/components/Sidebar';
+import Header from '@/components/Header';
 import { useMemo, useState, useEffect } from 'react';
-import { FaGamepad, FaShoppingBag } from 'react-icons/fa';
+import { FaShoppingBag } from 'react-icons/fa';
 
 const normieComments = [
   "This sends",
@@ -55,6 +56,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [showNFTModal, setShowNFTModal] = useState(false);
   const [showTeamModal, setShowTeamModal] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   // Hide loader after 2.5 seconds
@@ -101,90 +103,31 @@ export default function Home() {
       {/* Team Modal */}
       <TeamModal isOpen={showTeamModal} onClose={() => setShowTeamModal(false)} />
       
-      {/* PFP Merch Banner - Top of Page */}
+      {/* PFP Merch Banner - Fixed at Top */}
       <a
         href="https://pfpmerch.fun/"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed top-0 left-0 right-0 z-[60] bg-gradient-to-r from-[#00ff41] to-[#00cc34] text-black font-black text-sm sm:text-base py-2 sm:py-3 px-4 text-center hover:from-[#00cc34] hover:to-[#00ff41] transition-all duration-300 shadow-lg hover:shadow-[0_0_30px_rgba(0,255,65,0.6)] flex items-center justify-center gap-2"
+        style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 60 }}
+        className="py-2 sm:py-3 px-4 text-center flex items-center justify-center gap-2 backdrop-blur-xl bg-gradient-to-r from-[#00ff41]/20 via-[#00cc34]/20 to-[#00ff41]/20 border-b border-[#00ff41]/30 shadow-[0_8px_32px_rgba(0,255,65,0.2)] hover:shadow-[0_8px_32px_rgba(0,255,65,0.4)] transition-all duration-300 relative overflow-hidden group"
       >
-        <FaShoppingBag className="w-4 h-4 sm:w-5 sm:h-5 animate-pulse" />
-        <span>PFP Merch - Get Yours Now</span>
-        <span className="hidden sm:inline">→</span>
+        {/* Animated gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#00ff41]/0 via-[#00ff41]/30 to-[#00ff41]/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+        <span className="relative z-10 text-[#00ff41] font-black text-sm sm:text-base drop-shadow-[0_0_8px_rgba(0,255,65,0.8)]">
+          <FaShoppingBag className="w-4 h-4 sm:w-5 sm:h-5 animate-pulse inline-block mr-2" />
+          PFP Merch - Get Yours Now
+          <span className="hidden sm:inline ml-2">→</span>
+        </span>
       </a>
+
+      {/* Header */}
+      <Header onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
       
-      {/* Fixed Whitepaper Button - Top Left */}
-      <div className="fixed top-14 left-2 sm:top-20 sm:left-4 z-50 w-[120px] sm:w-[180px]">
-        <a
-          href="/Pfp Whitepaper.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="w-full px-3 py-1.5 sm:px-6 sm:py-3 bg-transparent border-2 border-[#00ff41] hover:bg-[#00ff41]/10 text-[#00ff41] font-bold text-xs sm:text-base rounded-lg shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,65,0.5)] flex items-center justify-center gap-1 sm:gap-2 backdrop-blur-sm"
-        >
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            className="h-3 w-3 sm:h-5 sm:w-5" 
-            viewBox="0 0 20 20" 
-            fill="currentColor"
-          >
-            <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
-          </svg>
-          <span className="hidden sm:inline">Whitepaper</span>
-          <span className="sm:hidden">Paper</span>
-        </a>
-      </div>
+      {/* Sidebar */}
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-      {/* Fixed Play Game Button - Top Left Below Whitepaper */}
-      <div className="fixed top-28 left-2 sm:top-36 sm:left-4 z-50 w-[120px] sm:w-[180px]">
-        <Link
-          href="/pacman"
-          className="w-full px-3 py-1.5 sm:px-6 sm:py-3 bg-transparent border-2 border-purple-500 hover:bg-purple-500/10 text-purple-400 font-bold text-xs sm:text-base rounded-lg shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(147,51,234,0.5)] flex items-center justify-center gap-1 sm:gap-2 backdrop-blur-sm"
-        >
-          <FaGamepad className="h-3 w-3 sm:h-5 sm:w-5" />
-          <span className="hidden sm:inline">Play Game</span>
-          <span className="sm:hidden">Game</span>
-        </Link>
-      </div>
-      
-      {/* Fixed Market Cap Tracker - Top Right */}
-      <div className="fixed top-14 right-2 sm:top-20 sm:right-4 z-50">
-        <MarketCapTracker />
-      </div>
-
-      {/* Fixed Moonshot Button - Top Right Below Market Cap */}
-      <a
-        href="https://moonshot.com/5TfqNKZbn9AnNtzq8bbkyhKgcPGTfNDc9wNzFrTBpump"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed top-28 right-2 sm:top-36 sm:right-4 z-50 group"
-        title="View on Moonshot"
-      >
-        <div className="relative px-2 py-1.5 sm:px-4 sm:py-3 h-[28px] sm:h-[44px] bg-gray-800 rounded-full shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-[0_0_30px_rgba(107,114,128,0.6)] flex items-center justify-center gap-1 sm:gap-2">
-          <img 
-            src="/moonshot_light.png" 
-            alt="Moonshot" 
-            className="h-3 w-auto sm:h-5"
-          />
-        </div>
-      </a>
-
-      {/* Fixed MEXC Button - Top Right Below Moonshot */}
-      <a
-        href="https://www.mexc.com/exchange/PFP_USDT"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed top-[112px] right-2 sm:top-52 sm:right-4 z-50 group"
-        title="Trade PFP on MEXC"
-      >
-        <div className="relative px-2 py-1.5 sm:px-4 sm:py-3 h-[28px] sm:h-[44px] bg-gradient-to-br from-[#00d4ff] to-[#0099cc] rounded-full shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-[0_0_30px_rgba(0,212,255,0.6)] flex items-center justify-center gap-1 sm:gap-2">
-          <img 
-            src="/mexclogo.png" 
-            alt="MEXC" 
-            className="w-3 h-3 sm:w-5 sm:h-5"
-          />
-          <span className="text-white font-bold text-xs sm:text-sm">MEXC</span>
-        </div>
-      </a>
+      {/* Floating Market Cap Tracker */}
+      <MarketCapTracker />
 
       {/* Fixed Team Button - Bottom Left */}
       <button
@@ -192,8 +135,9 @@ export default function Home() {
         className="fixed bottom-6 left-6 z-50 group"
         title="Meet the Team"
       >
-        <div className="relative px-5 py-3 bg-gradient-to-br from-[#ff00ff] to-[#cc00cc] rounded-full shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-[0_0_30px_rgba(255,0,255,0.6)] hover:animate-pulse">
-          <span className="text-white font-black text-lg">Team</span>
+        <div className="relative px-5 py-3 backdrop-blur-xl bg-gradient-to-br from-[#ff00ff]/30 via-[#cc00cc]/30 to-[#ff00ff]/30 border border-[#ff00ff]/40 rounded-full shadow-[0_8px_32px_rgba(255,0,255,0.3)] hover:shadow-[0_8px_32px_rgba(255,0,255,0.5)] transition-all duration-300 hover:scale-110 hover:border-[#ff00ff]/60 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+          <span className="relative z-10 text-white font-black text-lg drop-shadow-[0_0_8px_rgba(255,0,255,0.8)]">Team</span>
         </div>
       </button>
 
@@ -205,9 +149,10 @@ export default function Home() {
         className="fixed bottom-6 right-6 z-50 group"
         title="View NFT Collection"
       >
-        <div className="relative px-5 py-3 bg-gradient-to-br from-[#00ff41] to-[#00cc34] rounded-full shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-[0_0_30px_rgba(0,255,65,0.6)] animate-pulse hover:animate-none">
-          <span className="text-black font-black text-lg">NFTs</span>
-          <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-[#0a0e17] animate-bounce" />
+        <div className="relative px-5 py-3 backdrop-blur-xl bg-gradient-to-br from-[#00ff41]/30 via-[#00cc34]/30 to-[#00ff41]/30 border border-[#00ff41]/40 rounded-full shadow-[0_8px_32px_rgba(0,255,65,0.3)] hover:shadow-[0_8px_32px_rgba(0,255,65,0.5)] transition-all duration-300 hover:scale-110 hover:border-[#00ff41]/60 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+          <span className="relative z-10 text-[#00ff41] font-black text-lg drop-shadow-[0_0_8px_rgba(0,255,65,0.8)]">NFTs</span>
+          <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-[#0a0e17] animate-bounce z-20" />
         </div>
       </a>
 
@@ -237,7 +182,7 @@ export default function Home() {
       </div>
 
       {/* Main Hero Content */}
-      <div className="relative z-10 w-full min-h-screen flex items-center justify-center px-4 py-8 pt-20 sm:pt-28">
+      <div className="relative z-10 w-full min-h-screen flex items-center justify-center px-4 py-8 pt-32 sm:pt-40">
         <Hero />
       </div>
 

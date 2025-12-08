@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { FaXTwitter, FaCopy, FaCheck, FaImage } from 'react-icons/fa6';
 import { useState } from 'react';
-import { CONTRACT_ADDRESS, TICKER, PROJECT_NAME, X_COMMUNITY_LINK, DEXTOOLS_LINK, DEXSCREENER_LINK, JUPITER_LINK } from '@/lib/config';
+import { CONTRACT_ADDRESS, TICKER, PROJECT_NAME, X_COMMUNITY_LINK } from '@/lib/config';
 import PFPGenerator from './PFPGenerator';
 
 export default function Hero() {
@@ -52,13 +52,20 @@ export default function Hero() {
 
       {/* Tagline */}
       <motion.p
-        className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 max-w-2xl text-center px-4 font-light"
+        className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white max-w-3xl text-center px-4 font-light leading-relaxed relative"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6, duration: 0.6 }}
       >
-        Every normie who makes an account starts here. <br className="hidden sm:block" />
-        <span className="text-gray-400 text-sm sm:text-base md:text-lg">The blank slate. The face of every beginning.</span>
+        {/* Gradient background behind text */}
+        <span className="relative z-10">
+          Every normie who makes an account starts here. <br className="hidden sm:block" />
+          <span className="text-gray-200 text-base sm:text-lg md:text-xl lg:text-2xl">The blank slate. The face of every beginning.</span>
+        </span>
+        <span 
+          className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/40 blur-2xl -z-10"
+          aria-hidden="true"
+        />
       </motion.p>
 
       {/* CTA Buttons */}
@@ -69,166 +76,86 @@ export default function Hero() {
         transition={{ delay: 0.9, duration: 0.6 }}
       >
         {/* Top Row - Main Actions */}
-        <div className="flex flex-col sm:flex-row gap-3 md:gap-4 w-full">
+        <div className="flex flex-col sm:flex-row gap-4 md:gap-6 w-full">
           <button
             onClick={handleCopyCA}
-            className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-[#00ff41] text-black font-bold text-base sm:text-lg rounded-lg hover:bg-[#00cc34] transition-all duration-300 shadow-lg hover:shadow-[0_0_30px_rgba(0,255,65,0.5)] flex items-center justify-center gap-2 sm:gap-3 flex-1"
+            className="group relative px-6 sm:px-8 py-5 sm:py-6 backdrop-blur-2xl bg-gradient-to-br from-[#0a0e17]/50 via-[#15202b]/40 to-[#0a0e17]/50 border border-[#00ff41]/20 rounded-2xl hover:border-[#00ff41]/40 hover:from-[#0a0e17]/70 hover:via-[#15202b]/60 hover:to-[#0a0e17]/70 transition-all duration-500 shadow-[0_0_0_1px_rgba(0,255,65,0.1),0_4px_24px_rgba(0,255,65,0.1)] hover:shadow-[0_0_0_1px_rgba(0,255,65,0.2),0_8px_32px_rgba(0,255,65,0.25)] flex items-center justify-center gap-3 flex-1 overflow-hidden hover:scale-[1.02]"
           >
-            {copied ? (
-              <>
-                <FaCheck className="w-4 h-4 sm:w-5 sm:h-5" />
-                COPIED!
-              </>
-            ) : (
-              <>
-                <FaCopy className="w-4 h-4 sm:w-5 sm:h-5" />
-                COPY CA
-              </>
-            )}
+            {/* Animated gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#00ff41]/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out" />
+            {/* Glow effect */}
+            <div className="absolute inset-0 bg-[#00ff41]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+            
+            <div className="relative z-10 flex items-center justify-center gap-3">
+              {copied ? (
+                <>
+                  <div className="p-2 rounded-lg bg-[#00ff41]/10">
+                    <FaCheck className="w-4 h-4 sm:w-5 sm:h-5 text-[#00ff41]" />
+                  </div>
+                  <span className="text-[#00ff41] font-semibold text-sm sm:text-base">Copied!</span>
+                </>
+              ) : (
+                <>
+                  <div className="p-2 rounded-lg bg-[#00ff41]/10 group-hover:bg-[#00ff41]/20 transition-colors duration-300">
+                    <FaCopy className="w-4 h-4 sm:w-5 sm:h-5 text-[#00ff41]" />
+                  </div>
+                  <span className="text-white font-semibold text-sm sm:text-base">Copy Contract</span>
+                </>
+              )}
+            </div>
           </button>
 
           <button
             onClick={() => setShowPFPGenerator(true)}
-            className="px-6 sm:px-8 py-3 sm:py-4 bg-transparent border-2 border-[#00ff41] text-[#00ff41] font-bold text-base sm:text-lg rounded-lg hover:bg-[#00ff41]/10 transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 flex-1"
+            className="group relative px-6 sm:px-8 py-5 sm:py-6 backdrop-blur-2xl bg-gradient-to-br from-[#0a0e17]/50 via-[#15202b]/40 to-[#0a0e17]/50 border border-[#00ff41]/20 rounded-2xl hover:border-[#00ff41]/40 hover:from-[#0a0e17]/70 hover:via-[#15202b]/60 hover:to-[#0a0e17]/70 transition-all duration-500 shadow-[0_0_0_1px_rgba(0,255,65,0.1),0_4px_24px_rgba(0,255,65,0.1)] hover:shadow-[0_0_0_1px_rgba(0,255,65,0.2),0_8px_32px_rgba(0,255,65,0.25)] flex items-center justify-center gap-3 flex-1 overflow-hidden hover:scale-[1.02]"
           >
-            <FaImage className="w-4 h-4 sm:w-5 sm:h-5" />
-            <span className="whitespace-nowrap">PFP GENERATOR</span>
+            {/* Animated gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#00ff41]/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out" />
+            {/* Glow effect */}
+            <div className="absolute inset-0 bg-[#00ff41]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+            
+            <div className="relative z-10 flex items-center justify-center gap-3">
+              <div className="p-2 rounded-lg bg-[#00ff41]/10 group-hover:bg-[#00ff41]/20 transition-colors duration-300">
+                <FaImage className="w-4 h-4 sm:w-5 sm:h-5 text-[#00ff41]" />
+              </div>
+              <span className="text-white font-semibold text-sm sm:text-base">PFP Generator</span>
+            </div>
           </button>
 
           <a
             href={X_COMMUNITY_LINK}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 sm:px-8 py-3 sm:py-4 bg-transparent border-2 border-[#00ff41] text-[#00ff41] font-bold text-base sm:text-lg rounded-lg hover:bg-[#00ff41]/10 transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 flex-1"
+            className="group relative px-6 sm:px-8 py-5 sm:py-6 backdrop-blur-2xl bg-gradient-to-br from-[#0a0e17]/50 via-[#15202b]/40 to-[#0a0e17]/50 border border-[#00ff41]/20 rounded-2xl hover:border-[#00ff41]/40 hover:from-[#0a0e17]/70 hover:via-[#15202b]/60 hover:to-[#0a0e17]/70 transition-all duration-500 shadow-[0_0_0_1px_rgba(0,255,65,0.1),0_4px_24px_rgba(0,255,65,0.1)] hover:shadow-[0_0_0_1px_rgba(0,255,65,0.2),0_8px_32px_rgba(0,255,65,0.25)] flex items-center justify-center gap-3 flex-1 overflow-hidden hover:scale-[1.02]"
           >
-            <FaXTwitter className="w-4 h-4 sm:w-5 sm:h-5" />
-            <span className="whitespace-nowrap">JOIN COMMUNITY</span>
+            {/* Animated gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#00ff41]/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out" />
+            {/* Glow effect */}
+            <div className="absolute inset-0 bg-[#00ff41]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+            
+            <div className="relative z-10 flex items-center justify-center gap-3">
+              <div className="p-2 rounded-lg bg-[#00ff41]/10 group-hover:bg-[#00ff41]/20 transition-colors duration-300">
+                <FaXTwitter className="w-4 h-4 sm:w-5 sm:h-5 text-[#00ff41]" />
+              </div>
+              <span className="text-white font-semibold text-sm sm:text-base">Join Community</span>
+            </div>
           </a>
-        </div>
-
-        {/* Bottom Rows - DEX Links */}
-        <div className="flex flex-col gap-3 md:gap-4 w-full">
-          {/* First Row - 3 buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 w-full">
-            <a
-              href={JUPITER_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 sm:px-6 py-2.5 sm:py-3 bg-transparent border-2 border-gray-600 text-white font-semibold text-sm sm:text-base rounded-lg hover:border-[#00ff41] hover:text-[#00ff41] transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 group flex-1"
-            >
-              <div className="relative w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 rounded-full overflow-hidden">
-                <Image 
-                  src="/jupiterlogo.png" 
-                  alt="Jupiter" 
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <span>Jupiter</span>
-            </a>
-
-            <a
-              href={DEXTOOLS_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 sm:px-6 py-2.5 sm:py-3 bg-transparent border-2 border-gray-600 text-white font-semibold text-sm sm:text-base rounded-lg hover:border-[#00ff41] hover:text-[#00ff41] transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 group flex-1"
-            >
-              <div className="relative w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0">
-                <Image 
-                  src="/dextoolslogo.svg" 
-                  alt="DexTools" 
-                  fill
-                  className="object-contain"
-                />
-              </div>
-              <span>DexTools</span>
-            </a>
-
-            <a
-              href={DEXSCREENER_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 sm:px-6 py-2.5 sm:py-3 bg-transparent border-2 border-gray-600 text-white font-semibold text-sm sm:text-base rounded-lg hover:border-[#00ff41] hover:text-[#00ff41] transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 group flex-1"
-            >
-              <div className="relative w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0">
-                <Image 
-                  src="/dexlogo.jpg" 
-                  alt="DexScreener" 
-                  fill
-                  className="object-contain rounded"
-                />
-              </div>
-              <span>DexScreener</span>
-            </a>
-          </div>
-
-          {/* Second Row - 3 buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 w-full">
-            <a
-              href="https://www.coingecko.com/en/coins/pumpfun-pepe"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 sm:px-6 py-2.5 sm:py-3 bg-transparent border-2 border-gray-600 text-white font-semibold text-sm sm:text-base rounded-lg hover:border-[#00ff41] hover:text-[#00ff41] transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 group flex-1"
-            >
-              <div className="relative w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0">
-                <Image 
-                  src="/coingeckologo.png" 
-                  alt="CoinGecko" 
-                  fill
-                  className="object-contain"
-                />
-              </div>
-              <span>CoinGecko</span>
-            </a>
-
-            <a
-              href="https://dex.coinmarketcap.com/token/solana/5TfqNKZbn9AnNtzq8bbkyhKgcPGTfNDc9wNzFrTBpump/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 sm:px-6 py-2.5 sm:py-3 bg-transparent border-2 border-gray-600 text-white font-semibold text-sm sm:text-base rounded-lg hover:border-[#00ff41] hover:text-[#00ff41] transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 group flex-1"
-            >
-              <div className="relative w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0">
-                <Image 
-                  src="/cmclogo.jpeg" 
-                  alt="CoinMarketCap" 
-                  fill
-                  className="object-contain"
-                />
-              </div>
-              <span>CMC</span>
-            </a>
-
-            <a
-              href="https://memedepot.com/d/pumpfun-pepe"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 sm:px-6 py-2.5 sm:py-3 bg-transparent border-2 border-gray-600 text-white font-semibold text-sm sm:text-base rounded-lg hover:border-[#00ff41] hover:text-[#00ff41] transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 group flex-1"
-            >
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                className="w-5 h-5 sm:w-6 sm:h-6" 
-                viewBox="0 0 24 24" 
-                fill="currentColor"
-              >
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-              </svg>
-              <span>Meme Depot</span>
-            </a>
-          </div>
         </div>
       </motion.div>
 
       {/* Contract Address Display */}
       <motion.div
-        className="mt-4 md:mt-8 px-4 sm:px-6 py-2.5 sm:py-3 bg-black/50 border border-gray-700 rounded-lg backdrop-blur-sm max-w-full overflow-hidden"
+        className="mt-6 md:mt-10 px-6 sm:px-8 py-4 sm:py-5 backdrop-blur-2xl bg-gradient-to-br from-[#0a0e17]/50 via-[#15202b]/50 to-[#0a0e17]/50 border border-[#00ff41]/20 rounded-2xl shadow-[0_4px_20px_rgba(0,255,65,0.1)] max-w-2xl mx-auto"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2, duration: 0.6 }}
       >
-        <p className="text-gray-400 text-xs uppercase tracking-wider mb-1 text-center">Contract Address</p>
-        <p className="text-white font-mono text-xs sm:text-sm md:text-base break-all text-center">
-          {CONTRACT_ADDRESS}
-        </p>
+        <p className="text-[#00ff41]/70 text-xs uppercase tracking-widest mb-3 text-center font-semibold">Contract Address</p>
+        <div className="flex items-center justify-center gap-2">
+          <p className="text-white font-mono text-xs sm:text-sm md:text-base break-all text-center select-all">
+            {CONTRACT_ADDRESS}
+          </p>
+        </div>
       </motion.div>
 
       {/* PFP Generator Modal */}

@@ -50,28 +50,58 @@ export default function MarketCapTracker() {
     return `$${marketCap.toFixed(2)}`;
   };
 
-  if (loading) {
-    return (
-      <div className="px-2 py-1 sm:px-4 sm:py-2 md:px-6 md:py-2.5 bg-black/50 border border-gray-700 rounded-full backdrop-blur-sm">
-        <p className="text-gray-400 text-[10px] sm:text-xs md:text-sm">Loading...</p>
-      </div>
-    );
-  }
-
-  if (!tokenData) {
+  if (loading || !tokenData) {
     return null;
   }
 
   return (
     <motion.div
-      className="px-2 py-1 sm:px-4 sm:py-2 md:px-6 md:py-2.5 bg-black/50 border border-[#00ff41]/50 rounded-full backdrop-blur-sm"
-      initial={{ opacity: 0, scale: 0.8 }}
+      className="fixed z-50 pointer-events-none"
+      initial={{ opacity: 0, scale: 0 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <p className="text-[#00ff41] font-bold text-[10px] sm:text-sm md:text-base lg:text-lg tracking-wide">
-        Market Cap: {formatMarketCap(tokenData.marketCap)}
-      </p>
+      <motion.div
+        className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-br from-[#00ff41]/20 to-[#00cc34]/20 border-2 border-[#00ff41] backdrop-blur-sm shadow-[0_0_30px_rgba(0,255,65,0.5)] flex items-center justify-center"
+        initial={{ 
+          x: '10vw', 
+          y: '20vh' 
+        }}
+        animate={{
+          x: [
+            '10vw', '85vw', '15vw', '75vw', '25vw', '80vw', '20vw', '70vw', '10vw'
+          ],
+          y: [
+            '20vh', '15vh', '80vh', '25vh', '75vh', '30vh', '70vh', '35vh', '20vh'
+          ],
+        }}
+        transition={{
+          duration: 50,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+      >
+        {/* Pulsing glow effect */}
+        <motion.div
+          className="absolute inset-0 rounded-full bg-[#00ff41] opacity-20"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        />
+        
+        {/* Content */}
+        <div className="relative z-10 text-center px-2">
+          <p className="text-[#00ff41] font-black text-xs sm:text-sm md:text-base leading-tight">
+            {formatMarketCap(tokenData.marketCap)}
+          </p>
+        </div>
+      </motion.div>
     </motion.div>
   );
 }
