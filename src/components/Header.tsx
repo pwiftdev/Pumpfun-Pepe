@@ -2,9 +2,10 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { FaBars } from 'react-icons/fa';
+import { FaBars, FaChartLine } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 import { PROJECT_NAME, TICKER, CONTRACT_ADDRESS } from '@/lib/config';
+import StatsModal from './StatsModal';
 
 interface HeaderProps {
   onMenuClick: () => void;
@@ -13,6 +14,7 @@ interface HeaderProps {
 export default function Header({ onMenuClick }: HeaderProps) {
   const [priceChange, setPriceChange] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
+  const [showStatsModal, setShowStatsModal] = useState(false);
 
   useEffect(() => {
     const fetchPriceChange = async () => {
@@ -52,6 +54,7 @@ export default function Header({ onMenuClick }: HeaderProps) {
   };
 
   return (
+    <>
     <motion.header
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -92,18 +95,35 @@ export default function Header({ onMenuClick }: HeaderProps) {
             </div>
           </div>
 
-          {/* Hamburger Menu */}
-          <button
-            onClick={onMenuClick}
-            className="p-2 sm:p-3 backdrop-blur-xl bg-gradient-to-br from-[#00ff41]/10 via-[#00cc34]/10 to-[#00ff41]/10 border border-[#00ff41]/30 rounded-xl hover:border-[#00ff41]/60 hover:bg-gradient-to-br hover:from-[#00ff41]/20 hover:via-[#00cc34]/20 hover:to-[#00ff41]/20 transition-all duration-300 hover:scale-110 shadow-[0_8px_32px_rgba(0,255,65,0.2)] hover:shadow-[0_8px_32px_rgba(0,255,65,0.4)] relative overflow-hidden group"
-            aria-label="Toggle sidebar"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-            <FaBars className="w-5 h-5 sm:w-6 sm:h-6 text-[#00ff41] relative z-10 drop-shadow-[0_0_8px_rgba(0,255,65,0.8)]" />
-          </button>
+          {/* Action Buttons */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Stats Button */}
+            <button
+              onClick={() => setShowStatsModal(true)}
+              className="p-2 sm:p-3 backdrop-blur-xl bg-gradient-to-br from-[#00ff41]/10 via-[#00cc34]/10 to-[#00ff41]/10 border border-[#00ff41]/30 rounded-xl hover:border-[#00ff41]/60 hover:bg-gradient-to-br hover:from-[#00ff41]/20 hover:via-[#00cc34]/20 hover:to-[#00ff41]/20 transition-all duration-300 hover:scale-110 shadow-[0_8px_32px_rgba(0,255,65,0.2)] hover:shadow-[0_8px_32px_rgba(0,255,65,0.4)] relative overflow-hidden group"
+              aria-label="View statistics"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+              <FaChartLine className="w-5 h-5 sm:w-6 sm:h-6 text-[#00ff41] relative z-10 drop-shadow-[0_0_8px_rgba(0,255,65,0.8)]" />
+            </button>
+
+            {/* Hamburger Menu */}
+            <button
+              onClick={onMenuClick}
+              className="p-2 sm:p-3 backdrop-blur-xl bg-gradient-to-br from-[#00ff41]/10 via-[#00cc34]/10 to-[#00ff41]/10 border border-[#00ff41]/30 rounded-xl hover:border-[#00ff41]/60 hover:bg-gradient-to-br hover:from-[#00ff41]/20 hover:via-[#00cc34]/20 hover:to-[#00ff41]/20 transition-all duration-300 hover:scale-110 shadow-[0_8px_32px_rgba(0,255,65,0.2)] hover:shadow-[0_8px_32px_rgba(0,255,65,0.4)] relative overflow-hidden group"
+              aria-label="Toggle sidebar"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+              <FaBars className="w-5 h-5 sm:w-6 sm:h-6 text-[#00ff41] relative z-10 drop-shadow-[0_0_8px_rgba(0,255,65,0.8)]" />
+            </button>
+          </div>
         </div>
       </div>
     </motion.header>
+
+    {/* Stats Modal - rendered outside header to avoid positioning constraints */}
+    <StatsModal isOpen={showStatsModal} onClose={() => setShowStatsModal(false)} />
+  </>
   );
 }
 
