@@ -7,7 +7,6 @@ import Loader from '@/components/Loader';
 import MarketCapTracker from '@/components/MarketCapTracker';
 import NFTModal from '@/components/NFTModal';
 import TeamModal from '@/components/TeamModal';
-import MerchPopup from '@/components/MerchPopup';
 import Sidebar from '@/components/Sidebar';
 import Header from '@/components/Header';
 import { useMemo, useState, useEffect } from 'react';
@@ -57,7 +56,6 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [showNFTModal, setShowNFTModal] = useState(false);
   const [showTeamModal, setShowTeamModal] = useState(false);
-  const [showMerchPopup, setShowMerchPopup] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -75,16 +73,6 @@ export default function Home() {
     setMounted(true);
   }, []);
 
-  // Show merch popup 10 seconds after page loads
-  useEffect(() => {
-    if (!isLoading) {
-      const timer = setTimeout(() => {
-        setShowMerchPopup(true);
-      }, 10000); // 10 seconds
-
-      return () => clearTimeout(timer);
-    }
-  }, [isLoading]);
 
   // Generate comment props once on mount to avoid hydration issues
   const comments = useMemo(() => {
@@ -116,9 +104,6 @@ export default function Home() {
       {/* Team Modal */}
       <TeamModal isOpen={showTeamModal} onClose={() => setShowTeamModal(false)} />
 
-      {/* Merch Popup */}
-      <MerchPopup isOpen={showMerchPopup} onClose={() => setShowMerchPopup(false)} />
-      
       {/* PFP Merch Banner - Fixed at Top */}
       <a
         href="https://pfpmerch.fun/"
