@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaTimes, FaGamepad, FaFileAlt, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaTimes, FaGamepad, FaFileAlt, FaExternalLinkAlt, FaBullhorn, FaCoins } from 'react-icons/fa';
 import Image from 'next/image';
 import Link from 'next/link';
 import { CONTRACT_ADDRESS, JUPITER_LINK, DEXTOOLS_LINK, DEXSCREENER_LINK } from '@/lib/config';
@@ -70,6 +70,19 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
     },
   ];
 
+  const links = [
+    {
+      name: 'Bagwork',
+      href: 'https://t.co/Z2FJd40QMQ',
+      icon: 'bullhorn' as const,
+    },
+    {
+      name: 'Staking',
+      href: 'https://www.solsuite.io/pumpfunpepe',
+      icon: 'coins' as const,
+    },
+  ];
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -128,6 +141,30 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                     <span className="text-white font-semibold">Whitepaper</span>
                     <FaExternalLinkAlt className="w-3 h-3 text-gray-500 ml-auto" />
                   </a>
+                </div>
+
+                {/* Links */}
+                <div className="space-y-2">
+                  <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-3">Links</h3>
+                  
+                  {links.map((link) => (
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={onClose}
+                      className="flex items-center gap-3 p-3 backdrop-blur-xl bg-gradient-to-br from-[#0a0e17]/20 to-[#15202b]/20 border border-[#00ff41]/15 rounded-xl hover:border-[#00ff41]/40 hover:bg-gradient-to-br hover:from-[#00ff41]/8 hover:to-[#00cc34]/8 transition-all duration-300 group shadow-[0_4px_16px_rgba(0,255,65,0.08)] hover:shadow-[0_4px_16px_rgba(0,255,65,0.25)] relative overflow-hidden"
+                    >
+                      {link.icon === 'bullhorn' ? (
+                        <FaBullhorn className="w-5 h-5 text-orange-400 group-hover:text-orange-300" />
+                      ) : link.icon === 'coins' ? (
+                        <FaCoins className="w-5 h-5 text-yellow-400 group-hover:text-yellow-300" />
+                      ) : null}
+                      <span className="text-white font-semibold">{link.name}</span>
+                      <FaExternalLinkAlt className="w-3 h-3 text-gray-500 ml-auto" />
+                    </a>
+                  ))}
                 </div>
 
                 {/* Exchanges */}
