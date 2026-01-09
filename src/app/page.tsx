@@ -61,14 +61,7 @@ export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  // Hide loader after 2.5 seconds
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2500);
-
-    return () => clearTimeout(timer);
-  }, []);
+  // Loader is now controlled by video ending or skip button
 
   // Set mounted state to true only on client
   useEffect(() => {
@@ -108,7 +101,7 @@ export default function Home() {
 
   return (
     <>
-      <Loader isLoading={isLoading} />
+      <Loader isLoading={isLoading} onSkip={() => setIsLoading(false)} />
       
       {/* NFT Collection Modal */}
       <NFTModal isOpen={showNFTModal} onClose={() => setShowNFTModal(false)} />
