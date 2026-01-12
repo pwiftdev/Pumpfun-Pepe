@@ -82,13 +82,44 @@ export default function Loader({ isLoading, onSkip }: LoaderProps) {
                 One step closer to The <span className="text-[#00ff41] font-bold">$PFP Legacy</span>.
               </motion.p>
               <motion.p
-                className="text-[#00ff41] text-2xl sm:text-3xl md:text-4xl font-black tracking-wider drop-shadow-[0_0_12px_rgba(0,255,65,0.8)]"
+                className="text-[#00ff41] text-2xl sm:text-3xl md:text-4xl font-black tracking-wider drop-shadow-[0_0_12px_rgba(0,255,65,0.8)] mb-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.3, duration: 0.6 }}
               >
                 PFP GEN 2
               </motion.p>
+              
+              {/* Trade Buttons */}
+              <motion.div
+                className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.6, duration: 0.6 }}
+              >
+                <a
+                  href="https://magiceden.io/marketplace/pfp_gen2"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative px-6 py-3 backdrop-blur-xl bg-gradient-to-br from-[#00ff41]/30 via-[#00cc34]/30 to-[#00ff41]/30 border border-[#00ff41]/40 rounded-lg transition-all duration-300 hover:scale-105 hover:border-[#00ff41]/60 overflow-hidden shadow-[0_8px_32px_rgba(0,255,65,0.3)] hover:shadow-[0_8px_32px_rgba(0,255,65,0.5)]"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                  <span className="relative z-10 text-[#00ff41] font-black text-base sm:text-lg drop-shadow-[0_0_8px_rgba(0,255,65,0.8)]">
+                    Trade GEN2
+                  </span>
+                </a>
+                <a
+                  href="https://magiceden.io/marketplace/pumpfun_pepe"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative px-6 py-3 backdrop-blur-xl bg-gradient-to-br from-[#00ff41]/30 via-[#00cc34]/30 to-[#00ff41]/30 border border-[#00ff41]/40 rounded-lg transition-all duration-300 hover:scale-105 hover:border-[#00ff41]/60 overflow-hidden shadow-[0_8px_32px_rgba(0,255,65,0.3)] hover:shadow-[0_8px_32px_rgba(0,255,65,0.5)]"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                  <span className="relative z-10 text-[#00ff41] font-black text-base sm:text-lg drop-shadow-[0_0_8px_rgba(0,255,65,0.8)]">
+                    Trade OG
+                  </span>
+                </a>
+              </motion.div>
             </div>
           </motion.div>
         )}

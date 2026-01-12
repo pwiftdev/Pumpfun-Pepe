@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { FaBars, FaChartLine } from 'react-icons/fa';
+import { FaBars } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 import { PROJECT_NAME, TICKER, CONTRACT_ADDRESS } from '@/lib/config';
 import StatsModal from './StatsModal';
@@ -100,21 +100,21 @@ export default function Header({ onMenuClick }: HeaderProps) {
             {/* Stats Button */}
             <button
               onClick={() => setShowStatsModal(true)}
-              className="p-2 sm:p-3 backdrop-blur-xl bg-gradient-to-br from-[#00ff41]/10 via-[#00cc34]/10 to-[#00ff41]/10 border border-[#00ff41]/30 rounded-xl hover:border-[#00ff41]/60 hover:bg-gradient-to-br hover:from-[#00ff41]/20 hover:via-[#00cc34]/20 hover:to-[#00ff41]/20 transition-all duration-300 hover:scale-110 shadow-[0_8px_32px_rgba(0,255,65,0.2)] hover:shadow-[0_8px_32px_rgba(0,255,65,0.4)] relative overflow-hidden group"
+              className="px-3 sm:px-4 py-2 sm:py-3 backdrop-blur-xl bg-gradient-to-br from-red-500/10 via-red-600/10 to-red-500/10 border border-red-500/30 rounded-xl hover:border-red-500/60 hover:bg-gradient-to-br hover:from-red-500/20 hover:via-red-600/20 hover:to-red-500/20 transition-all duration-300 hover:scale-110 shadow-[0_8px_32px_rgba(255,0,0,0.2)] hover:shadow-[0_8px_32px_rgba(255,0,0,0.4)] relative overflow-hidden group"
               aria-label="View statistics"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-              <FaChartLine className="w-5 h-5 sm:w-6 sm:h-6 text-[#00ff41] relative z-10 drop-shadow-[0_0_8px_rgba(0,255,65,0.8)]" />
+              <span className="text-xs sm:text-sm font-black text-red-500 relative z-10 drop-shadow-[0_0_8px_rgba(255,0,0,0.8)] whitespace-nowrap">TOKEN STATS</span>
             </button>
 
             {/* Hamburger Menu */}
             <button
               onClick={onMenuClick}
-              className="p-2 sm:p-3 backdrop-blur-xl bg-gradient-to-br from-[#00ff41]/10 via-[#00cc34]/10 to-[#00ff41]/10 border border-[#00ff41]/30 rounded-xl hover:border-[#00ff41]/60 hover:bg-gradient-to-br hover:from-[#00ff41]/20 hover:via-[#00cc34]/20 hover:to-[#00ff41]/20 transition-all duration-300 hover:scale-110 shadow-[0_8px_32px_rgba(0,255,65,0.2)] hover:shadow-[0_8px_32px_rgba(0,255,65,0.4)] relative overflow-hidden group"
+              className="p-2 sm:p-3 backdrop-blur-xl bg-gradient-to-br from-red-500/10 via-red-600/10 to-red-500/10 border border-red-500/30 rounded-xl hover:border-red-500/60 hover:bg-gradient-to-br hover:from-red-500/20 hover:via-red-600/20 hover:to-red-500/20 transition-all duration-300 hover:scale-110 shadow-[0_8px_32px_rgba(255,0,0,0.2)] hover:shadow-[0_8px_32px_rgba(255,0,0,0.4)] relative overflow-hidden group"
               aria-label="Toggle sidebar"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-              <FaBars className="w-5 h-5 sm:w-6 sm:h-6 text-[#00ff41] relative z-10 drop-shadow-[0_0_8px_rgba(0,255,65,0.8)]" />
+              <FaBars className="w-5 h-5 sm:w-6 sm:h-6 text-red-500 relative z-10 drop-shadow-[0_0_8px_rgba(255,0,0,0.8)]" />
             </button>
           </div>
         </div>

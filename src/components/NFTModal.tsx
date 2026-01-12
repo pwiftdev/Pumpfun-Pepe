@@ -1,9 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useEffect } from 'react';
-import { FaTimes, FaPaintBrush, FaGem, FaRocket } from 'react-icons/fa';
-import Image from 'next/image';
+import { FaTimes, FaRocket } from 'react-icons/fa';
 
 interface NFTModalProps {
   isOpen: boolean;
@@ -31,8 +29,9 @@ export default function NFTModal({ isOpen, onClose }: NFTModalProps) {
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ type: "spring", duration: 0.5 }}
             className="fixed inset-0 z-[101] flex items-center justify-center p-4"
+            onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative w-full max-w-2xl bg-gradient-to-br from-[#0a0e17] via-[#15202b] to-[#0a0e17] rounded-2xl border-2 border-[#00ff41] shadow-[0_0_50px_rgba(0,255,65,0.3)] overflow-hidden">
+            <div className="relative w-full max-w-4xl bg-gradient-to-br from-[#0a0e17] via-[#15202b] to-[#0a0e17] rounded-2xl border-2 border-[#00ff41] shadow-[0_0_50px_rgba(0,255,65,0.3)] overflow-hidden">
               {/* Close Button */}
               <button
                 onClick={onClose}
@@ -43,72 +42,99 @@ export default function NFTModal({ isOpen, onClose }: NFTModalProps) {
 
               {/* Content */}
               <div className="p-6 sm:p-8">
-                {/* Header with Image */}
-                <div className="flex flex-col items-center mb-6">
-                  <div className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden border-4 border-[#00ff41] shadow-[0_0_30px_rgba(0,255,65,0.4)] mb-4">
-                    <Image 
-                      src="/pepeimage.png" 
-                      alt="Pumpfun Pepe NFT" 
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  
-                  <h2 className="text-3xl sm:text-4xl font-black text-white text-center mb-2 flex items-center justify-center gap-3">
-                    <FaPaintBrush className="text-[#00ff41]" />
-                    Pumpfun Pepe NFTs
-                  </h2>
-                  
-                  <div className="inline-block px-4 py-1 bg-[#00ff41]/20 border border-[#00ff41] rounded-full">
-                    <p className="text-[#00ff41] font-bold text-sm">Limited Collection</p>
-                  </div>
+                {/* Header */}
+                <h2 className="text-3xl sm:text-4xl font-black text-white text-center mb-8">
+                  NFT Collections
+                </h2>
+
+                {/* Cards Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* PFP GEN2 Card */}
+                  <motion.a
+                    href="https://magiceden.io/marketplace/pfp_gen2"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative border-2 border-[#00ff41]/40 rounded-xl p-6 hover:border-[#00ff41] transition-all duration-300 hover:scale-105 overflow-hidden min-h-[280px]"
+                    style={{
+                      backgroundImage: 'url(/pfpgen2.jpeg)',
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeat'
+                    }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 }}
+                  >
+                    {/* Dark overlay for text readability */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/60 to-black/70 group-hover:from-black/60 group-hover:via-black/50 group-hover:to-black/60 transition-all duration-300" />
+                    
+                    {/* Glow effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#00ff41]/0 via-[#00ff41]/10 to-[#00ff41]/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                    
+                    {/* Content */}
+                    <div className="relative z-10 h-full flex flex-col justify-between">
+                      <div>
+                        <div className="flex items-center justify-between mb-4">
+                          <h3 className="text-2xl font-black text-[#00ff41] drop-shadow-[0_0_8px_rgba(0,255,65,0.8)]">PFP GEN2</h3>
+                          <FaRocket className="w-6 h-6 text-[#00ff41] group-hover:translate-x-1 transition-transform duration-300 drop-shadow-[0_0_8px_rgba(0,255,65,0.8)]" />
+                        </div>
+                        <p className="text-gray-200 mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                          The next generation of PFP NFTs
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-2 text-[#00ff41] font-bold drop-shadow-[0_0_8px_rgba(0,255,65,0.8)]">
+                        <span>Trade Now</span>
+                        <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
+                      </div>
+                    </div>
+
+                    {/* Decorative glow */}
+                    <div className="absolute top-0 right-0 w-24 h-24 bg-[#00ff41] opacity-10 blur-[60px] rounded-full pointer-events-none" />
+                  </motion.a>
+
+                  {/* PFP OG Card */}
+                  <motion.a
+                    href="https://magiceden.io/marketplace/pumpfun_pepe"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative border-2 border-[#00ff41]/40 rounded-xl p-6 hover:border-[#00ff41] transition-all duration-300 hover:scale-105 overflow-hidden min-h-[280px]"
+                    style={{
+                      backgroundImage: 'url(/pfpog.avif)',
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeat'
+                    }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    {/* Dark overlay for text readability */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/60 to-black/70 group-hover:from-black/60 group-hover:via-black/50 group-hover:to-black/60 transition-all duration-300" />
+                    
+                    {/* Glow effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#00ff41]/0 via-[#00ff41]/10 to-[#00ff41]/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                    
+                    {/* Content */}
+                    <div className="relative z-10 h-full flex flex-col justify-between">
+                      <div>
+                        <div className="flex items-center justify-between mb-4">
+                          <h3 className="text-2xl font-black text-[#00ff41] drop-shadow-[0_0_8px_rgba(0,255,65,0.8)]">PFP OG</h3>
+                          <FaRocket className="w-6 h-6 text-[#00ff41] group-hover:translate-x-1 transition-transform duration-300 drop-shadow-[0_0_8px_rgba(0,255,65,0.8)]" />
+                        </div>
+                        <p className="text-gray-200 mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                          The original Pumpfun Pepe collection
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-2 text-[#00ff41] font-bold drop-shadow-[0_0_8px_rgba(0,255,65,0.8)]">
+                        <span>Trade Now</span>
+                        <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
+                      </div>
+                    </div>
+
+                    {/* Decorative glow */}
+                    <div className="absolute top-0 right-0 w-24 h-24 bg-[#00ff41] opacity-10 blur-[60px] rounded-full pointer-events-none" />
+                  </motion.a>
                 </div>
-
-                {/* Description */}
-                <div className="space-y-4 mb-6">
-                  <p className="text-gray-300 text-center text-base sm:text-lg leading-relaxed">
-                    A <span className="text-[#00ff41] font-bold">Cult Classic Collection</span> of <span className="text-white font-bold">967 one-of-a-kind</span> PumpFun Pepe NFTs, carefully curated with the community in mind.
-                  </p>
-                  
-                  <div className="bg-[#00ff41]/10 border border-[#00ff41]/30 rounded-lg p-4">
-                    <p className="text-white text-center font-semibold flex items-center justify-center gap-2">
-                      <FaGem className="text-[#00ff41]" />
-                      <span><span className="text-[#00ff41]">95% of sales</span> will be used to fuel the PFP ecosystem!</span>
-                    </p>
-                  </div>
-                </div>
-
-                {/* Features */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
-                  <div className="bg-black/30 border border-gray-700 rounded-lg p-3 text-center">
-                    <p className="text-2xl font-bold text-[#00ff41]">967</p>
-                    <p className="text-gray-400 text-sm">Unique NFTs</p>
-                  </div>
-                  <div className="bg-black/30 border border-gray-700 rounded-lg p-3 text-center">
-                    <p className="text-2xl font-bold text-[#00ff41]">1/1</p>
-                    <p className="text-gray-400 text-sm">Each Unique</p>
-                  </div>
-                  <div className="bg-black/30 border border-gray-700 rounded-lg p-3 text-center">
-                    <p className="text-2xl font-bold text-[#00ff41]">95%</p>
-                    <p className="text-gray-400 text-sm">Back to PFP</p>
-                  </div>
-                </div>
-
-                {/* CTA Button */}
-                <a
-                  href="https://magiceden.io/marketplace/pumpfun_pepe"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full px-8 py-4 bg-[#00ff41] hover:bg-[#00cc34] text-black font-bold text-lg rounded-lg transition-all duration-300 shadow-lg hover:shadow-[0_0_30px_rgba(0,255,65,0.5)] hover:scale-105"
-                >
-                  <FaRocket />
-                  View Collection on Magic Eden
-                </a>
-
-                {/* Footer Note */}
-                <p className="text-gray-500 text-xs text-center mt-4">
-                  Join the community • Be part of the movement
-                </p>
               </div>
 
               {/* Decorative glow effects */}

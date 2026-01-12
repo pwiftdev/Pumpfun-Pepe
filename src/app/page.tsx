@@ -151,19 +151,17 @@ export default function Home() {
       </button>
 
       {/* Fixed NFT Collection Button - Bottom Right */}
-      <a
-        href="https://magiceden.io/marketplace/pumpfun_pepe"
-        target="_blank"
-        rel="noopener noreferrer"
+      <button
+        onClick={() => setShowNFTModal(true)}
         className="fixed bottom-6 right-6 z-50 group"
-        title="View NFT Collection"
+        title="View NFT Collections"
       >
         <div className="relative px-5 py-3 backdrop-blur-xl bg-gradient-to-br from-[#00ff41]/30 via-[#00cc34]/30 to-[#00ff41]/30 border border-[#00ff41]/40 rounded-full shadow-[0_8px_32px_rgba(0,255,65,0.3)] hover:shadow-[0_8px_32px_rgba(0,255,65,0.5)] transition-all duration-300 hover:scale-110 hover:border-[#00ff41]/60 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
           <span className="relative z-10 text-[#00ff41] font-black text-lg drop-shadow-[0_0_8px_rgba(0,255,65,0.8)]">NFTs</span>
           <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-[#0a0e17] animate-bounce z-20" />
         </div>
-      </a>
+      </button>
 
     <main className="relative w-full min-h-screen overflow-x-hidden overflow-y-auto bg-gradient-to-br from-[#0a0e17] via-[#15202b] to-[#0a0e17]">
       {/* Cursor Trail Effect - Hide on mobile */}
