@@ -64,7 +64,7 @@ export default function Loader({ isLoading, onSkip }: LoaderProps) {
                 onEnded={handleVideoEnd}
                 onLoadedData={handleVideoLoaded}
               >
-                <source src="/PFP_NFT.mp4" type="video/mp4" />
+                <source src="/PFP_AI.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
               {/* Dim overlay */}
@@ -74,29 +74,32 @@ export default function Loader({ isLoading, onSkip }: LoaderProps) {
             {/* Center Bottom Overlay */}
             <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-10 text-center">
               <motion.p
-                className="text-white text-lg sm:text-xl md:text-2xl font-semibold mb-2 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
+                className="text-white text-lg sm:text-xl md:text-2xl font-semibold mb-4 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] max-w-2xl mx-auto px-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1, duration: 0.6 }}
               >
-                One step closer to The <span className="text-[#00ff41] font-bold">$PFP Legacy</span>.
-              </motion.p>
-              <motion.p
-                className="text-[#00ff41] text-2xl sm:text-3xl md:text-4xl font-black tracking-wider drop-shadow-[0_0_12px_rgba(0,255,65,0.8)] mb-6"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.3, duration: 0.6 }}
-              >
-                PFP GEN 2
+                Introducing <span className="text-[#00ff41] font-bold">PFP AI</span>. Cutting-edge technology running 24/7.
               </motion.p>
               
-              {/* Trade Buttons */}
+              {/* Action Buttons */}
               <motion.div
                 className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.6, duration: 0.6 }}
+                transition={{ delay: 1.3, duration: 0.6 }}
               >
+                <a
+                  href="https://x.com/PFP_AI"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative px-6 py-3 backdrop-blur-xl bg-gradient-to-br from-[#00ff41]/30 via-[#00cc34]/30 to-[#00ff41]/30 border border-[#00ff41]/40 rounded-lg transition-all duration-300 hover:scale-105 hover:border-[#00ff41]/60 overflow-hidden shadow-[0_8px_32px_rgba(0,255,65,0.3)] hover:shadow-[0_8px_32px_rgba(0,255,65,0.5)]"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                  <span className="relative z-10 text-[#00ff41] font-black text-base sm:text-lg drop-shadow-[0_0_8px_rgba(0,255,65,0.8)]">
+                    PFP: AI
+                  </span>
+                </a>
                 <a
                   href="https://magiceden.io/marketplace/pfp_gen2"
                   target="_blank"
