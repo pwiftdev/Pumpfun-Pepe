@@ -81,6 +81,11 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       href: 'https://www.solsuite.io/pumpfunpepe',
       icon: 'coins' as const,
     },
+    {
+      name: 'Staking GEN2',
+      href: 'https://t.co/XB5L04rCYK',
+      icon: 'coins' as const,
+    },
   ];
 
   return (

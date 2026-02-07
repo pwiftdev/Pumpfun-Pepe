@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaTimes, FaTwitter, FaCode, FaRocket, FaPalette, FaStar } from 'react-icons/fa';
+import { FaTimes, FaTwitter, FaCode, FaRocket, FaPalette, FaStar, FaUserTie, FaCrown } from 'react-icons/fa';
 import Image from 'next/image';
 
 interface TeamModalProps {
@@ -27,19 +27,25 @@ const teamMembers: TeamMember[] = [
     color: '#00ff41'
   },
   {
-    name: 'Armoski',
-    role: 'Deployer and Visionaire',
-    twitter: 'https://x.com/Armoskii',
-    icon: FaRocket,
-    color: '#ff00ff',
-    isHighlighted: true
-  },
-  {
     name: 'Bankai',
-    role: 'NFT Artist and Community Manager',
+    role: 'CTO Lead',
     twitter: 'https://x.com/thesnowman_144',
     icon: FaPalette,
     color: '#00d4ff'
+  },
+  {
+    name: 'LOL',
+    role: 'CTO Lead',
+    twitter: 'https://x.com/lolguyctoX',
+    icon: FaCode,
+    color: '#ff6b00'
+  },
+  {
+    name: 'Return',
+    role: 'CTO Lead',
+    twitter: 'https://x.com/BronzeAgePFP',
+    icon: FaUserTie,
+    color: '#9b59b6'
   }
 ];
 
@@ -91,6 +97,7 @@ export default function TeamModal({ isOpen, onClose }: TeamModalProps) {
                   {teamMembers.map((member, index) => {
                     const Icon = member.icon;
                     const isHighlighted = member.isHighlighted;
+                    const isCTOLead = member.role === 'CTO Lead';
                     return (
                       <motion.div
                         key={member.name}
@@ -99,7 +106,7 @@ export default function TeamModal({ isOpen, onClose }: TeamModalProps) {
                         transition={{ delay: index * 0.1 }}
                         className="relative group"
                       >
-                        {/* Highlighted Badge for Armoski */}
+                        {/* Highlighted Badge */}
                         {isHighlighted && (
                           <div className="absolute -top-2 sm:-top-3 left-1/2 transform -translate-x-1/2 z-10 flex items-center gap-1 px-2 sm:px-3 py-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full shadow-lg">
                             <FaStar className="w-2 h-2 sm:w-3 sm:h-3 text-white animate-pulse" />
@@ -150,15 +157,26 @@ export default function TeamModal({ isOpen, onClose }: TeamModalProps) {
 
                           {/* Name */}
                           <h3 className={`text-xl sm:text-2xl font-bold text-center mb-1 sm:mb-2 relative z-10 ${
-                            isHighlighted ? 'text-yellow-400' : 'text-white'
+                            isHighlighted ? 'text-yellow-400' : isCTOLead ? 'text-white' : 'text-white'
                           }`}>
                             {member.name}
                           </h3>
 
                           {/* Role */}
-                          <p className="text-gray-300 text-center text-xs sm:text-sm mb-3 sm:mb-4 flex-grow relative z-10">
-                            {member.role}
-                          </p>
+                          <div className="mb-3 sm:mb-4 flex-grow relative z-10 flex justify-center items-center min-h-[2rem]">
+                            {!isCTOLead ? (
+                              <p className="text-gray-300 text-center text-xs sm:text-sm">
+                                {member.role}
+                              </p>
+                            ) : (
+                              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-black/40 border border-yellow-500/40 rounded-lg backdrop-blur-sm shadow-[0_0_15px_rgba(255,215,0,0.3)]">
+                                <FaCrown className="w-3 h-3 text-yellow-400" />
+                                <span className="text-xs sm:text-sm font-bold text-yellow-400">
+                                  CTO LEAD
+                                </span>
+                              </div>
+                            )}
+                          </div>
 
                           {/* Twitter Link */}
                           <a
