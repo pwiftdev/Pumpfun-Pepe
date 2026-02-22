@@ -15,12 +15,6 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
   const exchanges = [
     {
-      name: 'MEXC',
-      href: 'https://www.mexc.com/exchange/PFP_USDT',
-      icon: '/mexclogo.png',
-      iconType: 'image' as const,
-    },
-    {
       name: 'Moonshot',
       href: 'https://moonshot.com/5TfqNKZbn9AnNtzq8bbkyhKgcPGTfNDc9wNzFrTBpump',
       icon: '/moonshot_light.png',
