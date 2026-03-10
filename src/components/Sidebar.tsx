@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaTimes, FaGamepad, FaFileAlt, FaExternalLinkAlt, FaBullhorn, FaCoins } from 'react-icons/fa';
+import { FaTimes, FaGamepad, FaFileAlt, FaExternalLinkAlt, FaBullhorn, FaCoins, FaStore, FaLayerGroup } from 'react-icons/fa';
 import Image from 'next/image';
 import Link from 'next/link';
 import { CONTRACT_ADDRESS, JUPITER_LINK, DEXTOOLS_LINK, DEXSCREENER_LINK } from '@/lib/config';
@@ -116,6 +116,32 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
               {/* Content */}
               <div className="p-4 space-y-4">
+                {/* Marketplace & Staking */}
+                <div className="grid grid-cols-2 gap-2">
+                  <a
+                    href="https://marketplace.pfpepe.fun"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={onClose}
+                    className="flex items-center justify-center gap-2 p-3 backdrop-blur-xl bg-gradient-to-br from-[#00ff41]/10 via-[#00cc34]/10 to-[#00ff41]/10 border border-[#00ff41]/30 rounded-xl hover:border-[#00ff41]/60 hover:from-[#00ff41]/20 hover:via-[#00cc34]/20 hover:to-[#00ff41]/20 transition-all duration-300 group shadow-[0_4px_16px_rgba(0,255,65,0.15)] hover:shadow-[0_4px_16px_rgba(0,255,65,0.4)] relative overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                    <FaStore className="w-4 h-4 text-[#00ff41] relative z-10" />
+                    <span className="text-sm font-black text-[#00ff41] relative z-10 drop-shadow-[0_0_8px_rgba(0,255,65,0.8)]">Marketplace</span>
+                  </a>
+                  <a
+                    href="https://staking.pfpepe.fun"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={onClose}
+                    className="flex items-center justify-center gap-2 p-3 backdrop-blur-xl bg-gradient-to-br from-[#00ff41]/10 via-[#00cc34]/10 to-[#00ff41]/10 border border-[#00ff41]/30 rounded-xl hover:border-[#00ff41]/60 hover:from-[#00ff41]/20 hover:via-[#00cc34]/20 hover:to-[#00ff41]/20 transition-all duration-300 group shadow-[0_4px_16px_rgba(0,255,65,0.15)] hover:shadow-[0_4px_16px_rgba(0,255,65,0.4)] relative overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                    <FaLayerGroup className="w-4 h-4 text-[#00ff41] relative z-10" />
+                    <span className="text-sm font-black text-[#00ff41] relative z-10 drop-shadow-[0_0_8px_rgba(0,255,65,0.8)]">Staking</span>
+                  </a>
+                </div>
+
                 {/* Quick Actions */}
                 <div className="space-y-2">
                   <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-3">Quick Actions</h3>
