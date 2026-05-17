@@ -99,7 +99,7 @@ export default function Header({ onMenuClick }: HeaderProps) {
           <div className="flex items-center gap-2 sm:gap-3">
             {/* Marketplace Button */}
             <a
-              href="https://marketplace.pfpepe.fun"
+              href="https://marketplace.pfp.army"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:flex px-3 sm:px-4 py-2 sm:py-3 backdrop-blur-xl bg-gradient-to-br from-[#00ff41]/10 via-[#00cc34]/10 to-[#00ff41]/10 border border-[#00ff41]/30 rounded-xl hover:border-[#00ff41]/60 hover:bg-gradient-to-br hover:from-[#00ff41]/20 hover:via-[#00cc34]/20 hover:to-[#00ff41]/20 transition-all duration-300 hover:scale-110 shadow-[0_8px_32px_rgba(0,255,65,0.2)] hover:shadow-[0_8px_32px_rgba(0,255,65,0.4)] relative overflow-hidden group"
@@ -110,7 +110,7 @@ export default function Header({ onMenuClick }: HeaderProps) {
 
             {/* Staking Button */}
             <a
-              href="https://staking.pfpepe.fun"
+              href="https://staking.pfp.army"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:flex px-3 sm:px-4 py-2 sm:py-3 backdrop-blur-xl bg-gradient-to-br from-[#00ff41]/10 via-[#00cc34]/10 to-[#00ff41]/10 border border-[#00ff41]/30 rounded-xl hover:border-[#00ff41]/60 hover:bg-gradient-to-br hover:from-[#00ff41]/20 hover:via-[#00cc34]/20 hover:to-[#00ff41]/20 transition-all duration-300 hover:scale-110 shadow-[0_8px_32px_rgba(0,255,65,0.2)] hover:shadow-[0_8px_32px_rgba(0,255,65,0.4)] relative overflow-hidden group"

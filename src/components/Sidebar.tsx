@@ -119,7 +119,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 {/* Marketplace & Staking */}
                 <div className="grid grid-cols-2 gap-2">
                   <a
-                    href="https://marketplace.pfpepe.fun"
+                    href="https://marketplace.pfp.army"
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={onClose}
@@ -130,7 +130,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                     <span className="text-sm font-black text-[#00ff41] relative z-10 drop-shadow-[0_0_8px_rgba(0,255,65,0.8)]">Marketplace</span>
                   </a>
                   <a
-                    href="https://staking.pfpepe.fun"
+                    href="https://staking.pfp.army"
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={onClose}
